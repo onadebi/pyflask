@@ -10,12 +10,12 @@ def index():
 
 @app.route("/login")
 def login():
-    return render_template("login.html",title="Home",login_status={'logged_in':False});
+    return render_template("login.html",title="Login");
 
 @app.route("/courses")
 def courses():
-    return render_template("courses.html",title="Home",login_status={'logged_in':False});
+    return render_template("courses.html",title="Courses");
 
 @app.route("/register")
 def register():
-    return render_template("register.html",title="Home",login_status={'logged_in':False});
+    return render_template("register.html",title="Register");
