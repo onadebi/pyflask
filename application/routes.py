@@ -6,12 +6,12 @@ from .app_services.courses_service import CoursesService as courseSvc;
 @app.route("/index")
 @app.route("/home")
 def index() -> str:
-    return render_template("index.html",title="Home",login_status={'logged_in':False});
+    return render_template("index.html",title="Home",login_status={'logged_in':False}, index= True);
 
 
 @app.route("/login")
 def login():
-    return render_template("login.html",title="Login");
+    return render_template("login.html",title="Login", login=True);
 
 @app.route("/courses")
 def courses():
@@ -21,4 +21,4 @@ def courses():
 
 @app.route("/register")
 def register():
-    return render_template("register.html",title="Register");
+    return render_template("register.html",title="Register", register=True);
