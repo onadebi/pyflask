@@ -1,32 +1,16 @@
-<!DOCTYPE html>
-<html>
-    {% include "includes/header.html" %}
-<body>
+{% extends "layout.html" %}
 
-<div class="container-fluid text-center top-container">
-    <img src="static/images/uta-logo-200.png">
-</div>
-<div class="container">
-
-    {% include "includes/nav.html" %}
-    
+{% block content %}
     <div class="row">
         <div class="col-md-12 text-center">
             <h1>Welcome to Universal Tech Academy.</h1>
 
-            {% if login_status.logged_in %}
+            {% if login %}
             <h3>Let's get started.</h3>
-            <div>
-                Logged in: {{login_status.logged_in}}
-            </div>
             {% else %}
             <p>Already registered? <a href="{{url_for('login') }}">Login</a></p>
             {% endif %}
 
-            </div>
+        </div>
     </div>
-</div>
-
-{% include "includes/footer.html" %}
-</body>
-</html>
+{% endblock %}

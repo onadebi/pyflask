@@ -1,7 +1,40 @@
-{% include "includes/header.html" %}
+{% extends "layout.html" %}
+   
+{% block content %}
+    <h1>Login</h1>
 
-<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h3></h3>
+            <form name="login" id="login" action="login.php" method="get">
+                <label for="username"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="username" id="username" required>
+                <br>
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" id="password" required>
+                <br class="clear">
+                <input class="btn-submit" type="button" name="btn-submit" value="Login">
+            </form>
+        </div>
+    </div>
+{% endblock %}
 
-    {% include "includes/nav.html" %}
+{% block scripts %}
+ <script>
+    window.onload = (evt)=>{
+        document.querySelector('input[name="username"]').focus();
+    }
+    document.querySelector('.btn-submit').addEventListener('click', function(e) {
+        e.preventDefault();
+        const username = document.querySelector('input[name="username"]').value;
+        if(username && username.trim().length > 0){
+            alert(`Successfully logged in as ${document.querySelector('input[name="username"]').value}!`);
 
-</div>
+            const formElement = document.getElementById('login');
+            formElement.submit();
+        }else{
+            alert('Please enter a valid username!');
+        }
+    });
+ </script>
+ {% endblock %}
