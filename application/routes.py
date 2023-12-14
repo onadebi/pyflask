@@ -1,5 +1,5 @@
 from . import app;
-from flask import render_template;
+from flask import render_template, request;
 from .app_services.courses_service import CoursesService as courseSvc;
 
 @app.route("/")
@@ -14,10 +14,21 @@ def login():
     return render_template("login.html",title="Login", login=True);
 
 @app.route("/courses")
-def courses():
+@app.route("/courses/<term>")
+def courses(term: str = "Spring 2019"):
     courseData: list = courseSvc().get_courses(); 
     print(f'\n*** {courseData[3]["title"]} ***\n')
-    return render_template("courses.html",title="Courses",courseData=courseData, courses = True );
+    return render_template("courses.html",title="Courses",courseData=courseData, courses = True, term = term );
+
+@app.route("/enrollment", methods=["GET","POST"])
+def enrollment():
+    data : dict = {};    # empty dictionary
+    if request.method == "GET":
+        courseID: str = request.args.get("courseID");
+        courseTitle: str = request.args.get("title");
+        courseTerm: str = request.args.get("term");
+        data= {"courseID":courseID,"title":courseTitle, "term":courseTerm};    
+    return render_template("enrollment.html",title="Enrollment",data=data, enrollment=True);
 
 @app.route("/register")
 def register():
