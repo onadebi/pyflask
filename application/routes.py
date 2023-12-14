@@ -1,5 +1,6 @@
 from . import app;
-from flask import render_template, request;
+from flask import render_template, request, Response;
+import json;
 from .app_services.courses_service import CoursesService as courseSvc;
 
 @app.route("/")
@@ -27,9 +28,26 @@ def enrollment():
         courseID: str = request.args.get("courseID");
         courseTitle: str = request.args.get("title");
         courseTerm: str = request.args.get("term");
-        data= {"courseID":courseID,"title":courseTitle, "term":courseTerm};    
+    else:
+        courseID: str = request.form.get("courseID");
+        courseTitle: str = request.form.get("title");
+        courseTerm: str = request.form.get("term");
+    data= {"courseID":courseID,"title":courseTitle, "term":courseTerm};    
     return render_template("enrollment.html",title="Enrollment",data=data, enrollment=True);
 
 @app.route("/register")
 def register():
     return render_template("register.html",title="Register", register=True);
+
+
+#region API Routes
+@app.route("/api/")
+@app.route("/api/<idx>")
+def api(idx: int =None):
+    if(idx==None):
+        jData = courseSvc().get_courses();
+    else:
+        jData = courseSvc().get_course_by_CourseId(int(idx));
+    return Response(json.dumps(jData), mimetype="application/json");
+
+#endregion

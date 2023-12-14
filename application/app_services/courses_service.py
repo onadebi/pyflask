@@ -16,3 +16,6 @@ class CoursesService():
 
     def get_courses(self) -> list[dict[str,str]]:
         return self.courses;
+
+    def get_course_by_CourseId(self, index: int) -> dict[str,str]:
+        return next((course for course in self.courses if course["courseID"] == str(index)), {});

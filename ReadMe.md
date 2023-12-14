@@ -4,7 +4,7 @@ To activate the virtaul env, run the command ```<path-to->\Scripts\activate```
 
 To exit the virtual env, run the command ```deactivate```
 
-Run ```pip install flast-wtf``` package to enable the use of Forms
+Run ```pip install flask-wtf``` package to enable the use of Forms
 
 Run ```pip install python-dotenv``` package to enable the use and reading of the .flaskenv file
 
