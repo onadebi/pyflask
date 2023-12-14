@@ -7,7 +7,7 @@ from .app_services.courses_service import CoursesService as courseSvc;
 @app.route("/index")
 @app.route("/home")
 def index() -> str:
-    return render_template("index.html",title="Home",login_status={'logged_in':False}, index= True);
+    return render_template("index.html",title="Home Page",login_status={'logged_in':False}, index= True);
 
 
 @app.route("/login")
