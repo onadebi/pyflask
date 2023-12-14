@@ -1,2 +1,4 @@
-venv
+lib
+lib64
+bin
 __pycache__
