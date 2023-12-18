@@ -1,7 +1,9 @@
 from . import app;
 from flask import render_template, request, Response;
 import json;
-from .app_services.courses_service import CoursesService as courseSvc;
+from application.app_services.courses_service import CoursesService as courseSvc;
+from application.models import User as UserModel;
+# from .app_services.user_service import UserService as userSvc;
 
 @app.route("/")
 @app.route("/index")
@@ -37,6 +39,7 @@ def enrollment():
 
 @app.route("/register")
 def register():
+    # userSvc().create_user({'first_name': 'Onadebi', 'last_name': 'Onax'})
     return render_template("register.html",title="Register", register=True);
 
 
