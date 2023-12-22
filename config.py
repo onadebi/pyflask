@@ -7,4 +7,5 @@ class Config(object):
     # MONGO_CONNECT = False;
     PDB = os.environ.get('DB_CON');
     print(f'rtyuioiuytr:::{PDB}')
+    MONGODB_NAME = 'UTA_Enrollment'
     MONGO_URI = os.environ.get('DB_CON');

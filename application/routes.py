@@ -14,13 +14,15 @@ def index() -> str:
 
 @app.route("/login")
 def login():
+    print(f'VALUES of COURSES FROM DB: {courseSvc().get_courses_fromDB()}')
     return render_template("login.html",title="Login", login=True);
 
 @app.route("/courses")
 @app.route("/courses/<term>")
 def courses(term: str = "Spring 2019"):
     courseData: list = courseSvc().get_courses(); 
-    print(f'\n*** {courseData[3]["title"]} ***\n')
+    print(courseData)
+    print(f'\n*** {courseData[0]["title"]} ***\n')
     return render_template("courses.html",title="Courses",courseData=courseData, courses = True, term = term );
 
 @app.route("/enrollment", methods=["GET","POST"])
