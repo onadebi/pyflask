@@ -2,8 +2,8 @@ from . import app;
 from flask import render_template, request, Response;
 import json;
 from application.app_services.courses_service import CoursesService as courseSvc;
-from application.models import User as UserModel;
-# from .app_services.user_service import UserService as userSvc;
+from application.models import User;
+from .app_services.user_service import UserService as userSvc;
 
 @app.route("/")
 @app.route("/index")
@@ -14,7 +14,6 @@ def index() -> str:
 
 @app.route("/login")
 def login():
-    print(f'VALUES of COURSES FROM DB: {courseSvc().get_courses_fromDB()}')
     return render_template("login.html",title="Login", login=True);
 
 @app.route("/courses")
@@ -55,4 +54,19 @@ def api(idx: int =None):
         jData = courseSvc().get_course_by_CourseId(int(idx));
     return Response(json.dumps(jData), mimetype="application/json");
 
+
+
 #endregion
+
+@app.route("/user")
+def user():
+    user_profile: User = {
+        'user_id' : 2,
+        'first_name':"Christian",
+        'last_name':"Hur",
+        'email':"christian_hur@onaxsys.com",
+        'password':"123abcd"
+    }
+    # objRes = userSvc().add(user_profile);
+
+    return render_template('user.html', users = userSvc().get_all_users(), title=' All Users.', user=True)

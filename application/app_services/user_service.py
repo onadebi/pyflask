@@ -16,3 +16,15 @@ class UserService():
             print(f"****DB Connection ERROR: {ex}****")
             return False;
     
+
+    def add(self, user: dict[{User}]) -> str:
+        for key, val in user.items(): 
+            print(f'\n\nUser {key} :: {val}')
+        id = mongoCon.db.get_collection('user').insert_one(user);
+        print(f'Result of inserted id : {id.inserted_id}')
+        return str(id.inserted_id);
+
+    def get_all_users(self) -> list[dict[{User}]]:        
+        cursor = mongoCon.db.get_collection('user').find({});
+        values = [doc for doc in cursor]
+        return values;

@@ -16,7 +16,7 @@ class CoursesService():
         except Exception as error:
             print(f'\n***ERROR:: {error} ***\n');
         
-        cursor =mongoCon.db.get_collection('user').find({});
+        cursor =mongoCon.db.get_collection('course').find({});
         self.all_courses = [document for document in cursor];
 
     def get_courses(self) -> list[dict[str,str]]:
@@ -24,9 +24,3 @@ class CoursesService():
 
     def get_course_by_CourseId(self, index: int) -> dict[str,str]:
         return next((course for course in self.all_courses if course["courseID"] == str(index)), {});
-
-
-    def get_courses_fromDB(self) -> list[dict[str,str]]:
-        cursor =mongoCon.db.get_collection('user').find({});
-        values = [document for document in cursor];
-        return values;
